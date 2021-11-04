@@ -24,8 +24,7 @@ class _CounterAppBodyState extends State<CounterAppBody> {
   void increase() {
     setState(() {
       counter++;
-      increaseHistory = List<int>.from(increaseHistory)
-        ..add(counter);
+      increaseHistory = List<int>.from(increaseHistory)..add(counter);
     });
   }
 
@@ -55,20 +54,19 @@ class _CounterAppBodyState extends State<CounterAppBody> {
                   onPressed: decrease,
                   child: const Text('-'),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 30,
                     vertical: 50,
                   ),
-                  child: Text('$counter',
+                  child: Text(
+                    '$counter',
                     style: const TextStyle(
                       fontSize: 20,
                       color: Colors.blue,
                     ),
                   ),
                 ),
-
                 ElevatedButton(
                   key: const Key('ElevatedButton-Increase'),
                   onPressed: increase,
