@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:todo/src/controllers/todo_controller.dart';
-import 'package:todo/src/todo_vanilla/todo_view.dart';
+import 'package:todo/src/todos_vanilla/todo_view.dart';
 
 /// The Widget that configures your application.
 class TodoApp extends StatelessWidget {

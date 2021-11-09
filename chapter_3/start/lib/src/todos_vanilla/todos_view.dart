@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/src/controllers/todo_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:todo/src/widgets/todo_list_tile.dart';
+import 'package:todo/src/widgets/widgets.dart';
 
 class TodoView extends StatelessWidget {
   const TodoView({Key? key, required this.controller}) : super(key: key);
@@ -30,7 +30,7 @@ class TodoView extends StatelessWidget {
                 child: TodoTextField(
                   onSubmitted: (value) {
                     controller.createTodo(Todo(
-                      id: controller.todos.length,
+                      id: controller.todos.length + 1,
                       task: value,
                     ));
                   },
@@ -62,41 +62,5 @@ class TodoView extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class TodoTextField extends StatefulWidget {
-  const TodoTextField({
-    Key? key,
-    required this.onSubmitted,
-  }) : super(key: key);
-  final Function(String value) onSubmitted;
-  @override
-  _TodoTextFieldState createState() => _TodoTextFieldState();
-}
-
-class _TodoTextFieldState extends State<TodoTextField> {
-  late final _controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      textInputAction: TextInputAction.done,
-      decoration: const InputDecoration.collapsed(
-        hintText: 'What needs to be done?',
-      ),
-      onSubmitted: (value) async {
-        widget.onSubmitted(value);
-
-        _controller.clear();
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

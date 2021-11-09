@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/todo_vanilla/app.dart';
+import 'package:todo/src/todos_vanilla/app.dart';
 import 'package:todo/src/controllers/todo_controller.dart';
 
 void main() async {
