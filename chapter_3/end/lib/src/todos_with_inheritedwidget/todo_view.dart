@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/controllers/todo_controller.dart';
+import 'package:todo/src/controllers/todos_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/src/widgets/todo_list_tile.dart';
 import 'package:todo/src/widgets/widgets.dart';
 
-class TodoView extends StatelessWidget {
-  const TodoView({Key? key}) : super(key: key);
+class TodosView extends StatelessWidget {
+  const TodosView({Key? key}) : super(key: key);
 
   static const routeName = '/todos';
 
@@ -70,14 +70,14 @@ class TodoView extends StatelessWidget {
   }
 }
 
-class TodosScope extends InheritedNotifier<TodoController> {
+class TodosScope extends InheritedNotifier<TodosController> {
   const TodosScope({
     Key? key,
-    TodoController? notifier,
+    TodosController? notifier,
     required Widget child,
   }) : super(key: key, notifier: notifier, child: child);
 
-  static TodoController of(BuildContext context) {
+  static TodosController of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<TodosScope>()!.notifier!;
   }
 }

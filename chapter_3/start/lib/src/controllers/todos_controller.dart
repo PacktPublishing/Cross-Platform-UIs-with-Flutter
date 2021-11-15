@@ -7,8 +7,8 @@ import 'dart:collection';
 /// update, or delete todos
 ///
 /// Controllers glue Data Services to Flutter Widgets.
-class TodoController with ChangeNotifier {
-  TodoController();
+class TodosController with ChangeNotifier {
+  TodosController();
 
   final List<Todo> _todos = [
     const Todo(

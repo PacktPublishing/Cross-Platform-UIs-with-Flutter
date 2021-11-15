@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:todo/src/controllers/todo_controller.dart';
+import 'package:todo/src/controllers/todos_controller.dart';
 
 import 'todo_view.dart';
 
 /// The Widget that configures your application.
-class TodoApp extends StatelessWidget {
-  const TodoApp({
+class TodosApp extends StatelessWidget {
+  const TodosApp({
     Key? key,
     required this.todoController,
   }) : super(key: key);
 
-  final TodoController todoController;
+  final TodosController todoController;
 
   @override
   Widget build(BuildContext context) {
-    // Glue the TodoController to the MaterialApp.
+    // Glue the TodosController to the MaterialApp.
     //
     // The AnimatedBuilder Widget listens to the SettingsController for changes.
     // Whenever the user updates their settings, the MaterialApp is rebuilt.
@@ -61,10 +61,10 @@ class TodoApp extends StatelessWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
-              case TodoView.routeName:
-                return TodoView(controller: todoController);
+              case TodosView.routeName:
+                return TodosView(controller: todoController);
               default:
-                return TodoView(controller: todoController);
+                return TodosView(controller: todoController);
             }
           },
         );

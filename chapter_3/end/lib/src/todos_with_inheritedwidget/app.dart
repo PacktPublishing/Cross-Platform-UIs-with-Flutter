@@ -5,17 +5,30 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'todo_view.dart';
 
 /// The Widget that configures your application.
-class TodoApp extends StatelessWidget {
-  const TodoApp({
+///
+/// The [TodosApp] includes children that rely on [TodosScope],
+/// so it should be wrapped with [TodosScope] in `main.dart`.
+///
+/// Example:
+///
+/// ```dart
+/// void main() async {
+///   final todoController = TodosController();
+///
+///   runApp(TodosScope(
+///     notifier: todoController,
+///     child: const TodosApp(),
+///   ));
+/// }
+/// ```
+///
+class TodosApp extends StatelessWidget {
+  const TodosApp({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Glue the TodoController to the MaterialApp.
-    //
-    // The AnimatedBuilder Widget listens to the SettingsController for changes.
-    // Whenever the user updates their settings, the MaterialApp is rebuilt.
     return MaterialApp(
       // Providing a restorationScopeId allows the Navigator built by the
       // MaterialApp to restore the navigation stack when a user leaves and
@@ -57,10 +70,10 @@ class TodoApp extends StatelessWidget {
           settings: routeSettings,
           builder: (BuildContext context) {
             switch (routeSettings.name) {
-              case TodoView.routeName:
-                return const TodoView();
+              case TodosView.routeName:
+                return const TodosView();
               default:
-                return const TodoView();
+                return const TodosView();
             }
           },
         );

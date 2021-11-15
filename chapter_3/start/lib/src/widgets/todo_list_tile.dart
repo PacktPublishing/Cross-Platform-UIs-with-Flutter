@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/controllers/todo_controller.dart';
+import 'package:todo/src/controllers/todos_controller.dart';
 
 class TodoListTile extends StatelessWidget {
   const TodoListTile({

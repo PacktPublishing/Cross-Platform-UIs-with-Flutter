@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/controllers/todo_controller.dart';
+import 'package:todo/src/controllers/todos_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:todo/src/widgets/todo_list_tile.dart';
-import 'package:provider/provider.dart';
 import 'package:todo/src/widgets/widgets.dart';
 
-class TodoView extends StatelessWidget {
-  const TodoView({Key? key}) : super(key: key);
+class TodosView extends StatelessWidget {
+  const TodosView({Key? key, required this.controller}) : super(key: key);
 
   static const routeName = '/todos';
 
+  final TodosController controller;
+
   @override
   Widget build(BuildContext context) {
-    final TodoController controller = context.read();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -39,14 +38,13 @@ class TodoView extends StatelessWidget {
                   },
                 ),
               ),
-              Builder(
-                builder: (BuildContext context) {
-                  final todos = context.select((TodoController m) => m.todos);
-
+              AnimatedBuilder(
+                animation: controller,
+                builder: (BuildContext context, Widget? child) {
                   return ListView.builder(
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      final todo = todos[index];
+                      final todo = controller.todos[index];
                       return TodoListTile(
                         todo: todo,
                         onToggleComplete: (bool? value) {
@@ -57,7 +55,7 @@ class TodoView extends StatelessWidget {
                         },
                       );
                     },
-                    itemCount: todos.length,
+                    itemCount: controller.todos.length,
                   );
                 },
               ),

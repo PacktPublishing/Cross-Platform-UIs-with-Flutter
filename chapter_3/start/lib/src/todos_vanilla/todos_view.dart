@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:todo/src/controllers/todo_controller.dart';
+import 'package:todo/src/controllers/todos_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo/src/widgets/widgets.dart';
 
-class TodoView extends StatelessWidget {
-  const TodoView({Key? key, required this.controller}) : super(key: key);
+class TodosView extends StatelessWidget {
+  const TodosView({Key? key, required this.controller}) : super(key: key);
 
   static const routeName = '/todos';
 
-  final TodoController controller;
+  final TodosController controller;
 
   @override
   Widget build(BuildContext context) {
