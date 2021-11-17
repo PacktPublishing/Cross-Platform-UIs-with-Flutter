@@ -32,7 +32,6 @@ class StandingsTab extends StatelessWidget {
               ),
               child: ListView.separated(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 itemCount: standingsList.length,
                 itemBuilder: (context, index) {
                   final item = standingsList[index];

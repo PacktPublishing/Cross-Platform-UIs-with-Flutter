@@ -4,7 +4,6 @@ import 'package:chapter_2/localization/localization.dart';
 import 'package:chapter_2/models/data_source.dart';
 import 'package:chapter_2/models/results_entry.dart';
 import 'package:chapter_2/routes/home_page/drivers_list.dart';
-import 'package:chapter_2/routes/home_page/number_indicator.dart';
 import 'package:chapter_2/routes/home_page/random_date_generator.dart';
 import 'package:chapter_2/routes/utils/breakpoints.dart';
 import 'package:chapter_2/routes/utils/collapsible/collapsible.dart';
@@ -84,9 +83,6 @@ class _CompactResultCard extends StatelessWidget with RandomDateGenerator {
                 header: ListTile(
                   title: Text(results.first.circuitName),
                   subtitle: Text(randomDate),
-                  trailing: NumberIndicator(
-                    number: results.length,
-                  ),
                 ),
                 content: DriversList(
                   results: results,
@@ -114,20 +110,20 @@ class _ExpandedResultCard extends StatelessWidget with RandomDateGenerator {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, dimensions) {
-        var width = max<double>(
+        var cardWidth = max<double>(
           mobileResultsBreakpoint,
           dimensions.maxWidth,
         );
 
-        if (width >= maxStretchResultCards) {
-          width = maxStretchResultCards;
+        if (cardWidth >= maxStretchResultCards - 50) {
+          cardWidth = maxStretchResultCards;
         }
 
-        final leftFlex = width < (maxStretchResultCards - 50) ? 2 : 3;
+        final leftFlex = cardWidth < maxStretchResultCards ? 2 : 3;
 
         return Center(
           child: SizedBox(
-            width: width - 50,
+            width: cardWidth - 50,
             child: Padding(
               padding: const EdgeInsets.only(
                 bottom: 20,

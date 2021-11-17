@@ -65,6 +65,9 @@ class NextRacesPage extends StatelessWidget with RandomDateGenerator {
                             'assets/svg/trophy.svg',
                             width: square / 1.8,
                             height: square / 1.8,
+                            placeholderBuilder: (_) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
                         ),
                       ),
