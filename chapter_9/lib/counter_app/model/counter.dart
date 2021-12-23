@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /// The state of the counter in the app.
 class Counter with ChangeNotifier {
