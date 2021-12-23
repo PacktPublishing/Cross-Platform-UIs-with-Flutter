@@ -22,5 +22,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # https://pub.dev/packages/flutter_lints
+  golden_toolkit: ^0.12.0
+
 flutter:
   uses-material-design: true

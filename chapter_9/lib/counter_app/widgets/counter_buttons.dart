@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 /// the center.
 class CounterButtons extends StatelessWidget {
   /// Creates a [CounterButtons] widget.
-  const CounterButtons({
-    Key? key,
-  }) : super(key: key);
+  const CounterButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 /// This widget keeps track of the counter values whenever it is increased.
 class HistoryWidget extends StatefulWidget {
   /// Creates an [HistoryWidget] widget.
-  const HistoryWidget({
-    Key? key,
-  }) : super(key: key);
+  const HistoryWidget({Key? key}) : super(key: key);
 
   @override
   State<HistoryWidget> createState() => _HistoryWidgetState();

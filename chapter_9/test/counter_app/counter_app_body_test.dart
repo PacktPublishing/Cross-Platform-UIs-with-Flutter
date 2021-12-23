@@ -3,6 +3,7 @@ import 'package:chapter_1/counter_app/widgets/app_title.dart';
 import 'package:chapter_1/counter_app/widgets/history_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 
 import '../mock_wrapper.dart';
 
@@ -29,10 +30,6 @@ void main() {
 
       // 0 is the default counter value
       expect(find.text('0'), findsOneWidget);
-      await expectLater(
-        find.byType(AppTitle),
-        matchesGoldenFile('counter_initial.png'),
-      );
 
       // Increasing by 2
       await tester.tap(increaseKey);
@@ -40,10 +37,6 @@ void main() {
 
       // Finds the counter text and the entry in the history list
       expect(find.text('1'), findsNWidgets(2));
-      await expectLater(
-        find.byType(AppTitle),
-        matchesGoldenFile('counter_increased.png'),
-      );
 
       // Decreasing by 2
       await tester.tap(decreaseKey);
@@ -52,9 +45,56 @@ void main() {
 
       // Only the counter has negative values, the history doesn't
       expect(find.text('-1'), findsOneWidget);
-      await expectLater(
-        find.byType(AppTitle),
-        matchesGoldenFile('counter_decreased.png'),
+    });
+
+    testGoldens('CounterAppBody no history - golden', (tester) async {
+      final builder = GoldenBuilder.column()
+        ..addScenario(
+          'No history',
+          const SizedBox(
+            width: 400,
+            height: 400,
+            child: MockWrapper(
+              child: CounterAppBody(),
+            ),
+          ),
+        );
+
+      await tester.pumpWidgetBuilder(
+        builder.build(),
+        surfaceSize: const Size(400, 460),
+      );
+      await screenMatchesGolden(tester, 'counter_app_body_no_history');
+    });
+
+    testGoldens('CounterAppBody with history - golden', (tester) async {
+      final builder = GoldenBuilder.column()
+        ..addScenario(
+          'With history',
+          const SizedBox(
+            width: 400,
+            height: 400,
+            child: MockWrapper(
+              child: CounterAppBody(),
+            ),
+          ),
+        );
+
+      await tester.pumpWidgetBuilder(
+        builder.build(),
+        surfaceSize: const Size(400, 500),
+      );
+      await screenMatchesGolden(
+        tester,
+        'counter_app_body_with_history',
+        customPump: (tester) async {
+          final increaseKey = find.byKey(const Key('ElevatedButton-Increase'));
+
+          await tester.tap(increaseKey);
+          await tester.tap(increaseKey);
+
+          await tester.pumpAndSettle();
+        },
       );
     });
   });

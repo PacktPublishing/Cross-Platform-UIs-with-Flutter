@@ -11,9 +11,7 @@ void main() {
 /// The root widget of the app.
 class EnhancedCounterApp extends StatelessWidget {
   /// Creates an [EnhancedCounterApp] instance.
-  const EnhancedCounterApp({
-    Key? key,
-  }) : super(key: key);
+  const EnhancedCounterApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

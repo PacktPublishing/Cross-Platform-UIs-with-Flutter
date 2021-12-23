@@ -17,13 +17,11 @@ class CounterState extends InheritedWidget {
   /// Looks for the closest [CounterState] instance up in the widget
   /// tree and returns it. Throws if no matches are found.
   static CounterState of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<CounterState>()!;
+    return context.dependOnInheritedWidgetOfExactType<CounterState>()!;
   }
 
   @override
   bool updateShouldNotify(covariant CounterState oldWidget) {
-    return model.counter != oldWidget.model.counter ||
-        model.history.length != oldWidget.model.history.length;
+    return model.counter != oldWidget.model.counter;
   }
 }

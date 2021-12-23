@@ -8,9 +8,7 @@ import 'package:flutter/material.dart';
 /// The contents of the counter app.
 class CounterAppBody extends StatelessWidget {
   /// Creates a [CounterAppBody] widget.
-  const CounterAppBody({
-    Key? key,
-  }) : super(key: key);
+  const CounterAppBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
