@@ -8,20 +8,23 @@ import 'package:google_fonts/google_fonts.dart';
 void main() {
   // Registering fonts licences
   LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    final license = await rootBundle.loadString(
+      'assets/fonts/OFL.txt',
+    );
+
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
 
   // Running the app
   runApp(
-    const EquationsApp(),
+    const RaceStandingsApp(),
   );
 }
 
 /// The root widget of the app.
-class EquationsApp extends StatelessWidget {
+class RaceStandingsApp extends StatelessWidget {
   /// Creates an [EquationsApp] instance.
-  const EquationsApp({
+  const RaceStandingsApp({
     Key? key,
   }) : super(key: key);
 

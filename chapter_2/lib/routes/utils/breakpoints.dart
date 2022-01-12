@@ -5,7 +5,7 @@ const mobileResultsBreakpoint = 500.0;
 const maxStretchResultCards = 900.0;
 
 /// The maximum stretch for the standings items.
-const maxStretchStandingsCards = 650.0;
+const maxStretchStandingsCards = 600.0;
 
 /// The maximum allowed width of the circular progress arc.
 const maxCircularProgress = 150.0;

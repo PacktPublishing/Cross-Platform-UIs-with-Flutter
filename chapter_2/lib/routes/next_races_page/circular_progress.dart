@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-/// A circular progress indicator
+/// A circular progress indicator with a grey rail and a blue line.
 class CircularProgressPainter extends CustomPainter {
   /// The progression status.
   final double progression;

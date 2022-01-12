@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 /// No differences since both ways are valid.
 abstract class RouteGenerator {
   /// Route name for the home page of the app.
-  static const homePage = '/';
+  static const home = '/';
 
   /// Route name for the settings page.
   static const nextRacesPage = '/next_races';
@@ -25,7 +25,7 @@ abstract class RouteGenerator {
   /// The "dispatcher" that assigns a route name to a particular widget.
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case homePage:
+      case home:
         return PageRouteBuilder<HomePage>(
           pageBuilder: (_, __, ___) => const HomePage(),
         );
