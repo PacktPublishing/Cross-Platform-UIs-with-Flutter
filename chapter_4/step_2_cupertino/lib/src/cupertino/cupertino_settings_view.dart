@@ -12,14 +12,14 @@ class CupertinoSettingsView extends StatelessWidget {
         middle: Text('Settings'),
       ),
       child: SafeArea(
-        child: SettingsView(),
+        child: _SettingsForm(),
       ),
     );
   }
 }
 
-class SettingsView extends StatelessWidget {
-  const SettingsView({
+class _SettingsForm extends StatelessWidget {
+  const _SettingsForm({
     Key? key,
   }) : super(key: key);
 
@@ -63,41 +63,13 @@ class SettingsView extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () async {
-                  final themeMode = await showCupertinoModalPopup<
-                          AdaptiveThemeMode?>(
-                      context: context,
-                      builder: (context) {
-                        return CupertinoActionSheet(
-                          title: const Text('Choose app theme'),
-                          actions: [
-                            CupertinoActionSheetAction(
-                              child: const Text('System Theme'),
-                              onPressed: () {
-                                Navigator.pop(
-                                    context, AdaptiveThemeMode.system);
-                              },
-                            ),
-                            CupertinoActionSheetAction(
-                              child: const Text('Light Theme'),
-                              onPressed: () {
-                                Navigator.pop(context, AdaptiveThemeMode.light);
-                              },
-                            ),
-                            CupertinoActionSheetAction(
-                              child: const Text('Dark Theme'),
-                              onPressed: () {
-                                Navigator.pop(context, AdaptiveThemeMode.dark);
-                              },
-                            ),
-                          ],
-                          cancelButton: CupertinoActionSheetAction(
-                            child: const Text('Cancel'),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        );
-                      });
+                  final themeMode =
+                      await showCupertinoModalPopup<AdaptiveThemeMode?>(
+                    context: context,
+                    builder: (context) {
+                      return const _ThemeActionSheet();
+                    },
+                  );
 
                   if (themeMode != null) {
                     settingsController.updateThemeMode(themeMode);
@@ -182,6 +154,45 @@ class SettingsView extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ThemeActionSheet extends StatelessWidget {
+  const _ThemeActionSheet({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoActionSheet(
+      title: const Text('Choose app theme'),
+      actions: [
+        CupertinoActionSheetAction(
+          child: const Text('System Theme'),
+          onPressed: () {
+            Navigator.pop(context, AdaptiveThemeMode.system);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: const Text('Light Theme'),
+          onPressed: () {
+            Navigator.pop(context, AdaptiveThemeMode.light);
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: const Text('Dark Theme'),
+          onPressed: () {
+            Navigator.pop(context, AdaptiveThemeMode.dark);
+          },
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: const Text('Cancel'),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
