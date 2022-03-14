@@ -22,7 +22,7 @@ class SettingsApp extends StatelessWidget {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
       default:
-        return const CupertinoSettingsApp();
+        return const MaterialSettingsApp();
     }
   }
 }
