@@ -51,31 +51,9 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         controller: _controller,
         children: [
           for (final storiesType in StoriesType.values)
-            Navigator(
-              key: _navigatorKeys[StoriesType.values.indexOf(storiesType)],
-              onGenerateRoute: (RouteSettings routeSettings) {
-                return MaterialPageRoute<void>(
-                  settings: routeSettings,
-                  builder: (BuildContext context) {
-                    switch (routeSettings.name) {
-                      case StoryDetailsView.routeName:
-                        assert(routeSettings.arguments != null);
-                        final arguments = routeSettings.arguments
-                            as StoryDetailsViewArguments;
-
-                        return StoryDetailsView(
-                          storyId: arguments.storyId,
-                        );
-                      case StoryListView.routeName:
-                      default:
-                        return StoryListView(
-                          storiesType: storiesType,
-                        );
-                    }
-                  },
-                );
-              },
-            )
+            StoryListView(
+              storiesType: storiesType,
+            ),
         ],
       ),
     );

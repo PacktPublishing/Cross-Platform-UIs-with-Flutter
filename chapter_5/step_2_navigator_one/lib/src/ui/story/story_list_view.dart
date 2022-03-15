@@ -25,8 +25,12 @@ class StoryListView extends StatefulWidget {
   State<StoryListView> createState() => _StoryListViewState();
 }
 
-class _StoryListViewState extends State<StoryListView> {
+class _StoryListViewState extends State<StoryListView>
+    with AutomaticKeepAliveClientMixin {
   late final StoryController _storyController;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -37,6 +41,8 @@ class _StoryListViewState extends State<StoryListView> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return ChangeNotifierProvider.value(
       value: _storyController,
       child: Scaffold(

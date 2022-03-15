@@ -29,6 +29,26 @@ class HackerNewsApp extends StatelessWidget {
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.dark,
+      onGenerateRoute: (RouteSettings routeSettings) {
+        return MaterialPageRoute<void>(
+          settings: routeSettings,
+          builder: (BuildContext context) {
+            switch (routeSettings.name) {
+              case StoryDetailsView.routeName:
+                assert(routeSettings.arguments != null);
+                final arguments =
+                    routeSettings.arguments as StoryDetailsViewArguments;
+
+                return StoryDetailsView(
+                  storyId: arguments.storyId,
+                );
+              case StoryListView.routeName:
+              default:
+                return const HomeView();
+            }
+          },
+        );
+      },
       home: const HomeView(),
     );
   }
