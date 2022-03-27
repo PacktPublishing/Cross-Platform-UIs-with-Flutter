@@ -16,6 +16,7 @@ class StoryDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: WebView(
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: 'https://news.ycombinator.com/item?id=$storyId',
@@ -30,7 +31,7 @@ class StoryDetailsView extends StatelessWidget {
 }
 
 class StoryDetailsViewArguments {
-  StoryDetailsViewArguments(this.storyId);
+  const StoryDetailsViewArguments(this.storyId);
 
   final int storyId;
 }

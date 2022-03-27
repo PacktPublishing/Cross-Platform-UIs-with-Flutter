@@ -48,11 +48,11 @@ class _StoryListViewState extends State<StoryListView>
       child: Scaffold(
         body: Selector<StoryController, UnmodifiableListView<Story>>(
           selector: (context, controller) => controller.stories,
-          builder: (context, state, child) {
+          builder: (context, stories, child) {
             return ListView.builder(
-              itemCount: state.length,
+              itemCount: stories.length,
               itemBuilder: (BuildContext context, int index) {
-                final story = state[index];
+                final story = stories[index];
 
                 return ListTile(
                   title: Text(
@@ -83,10 +83,9 @@ class _StoryListViewState extends State<StoryListView>
   }
 
   void _navigateToWebview(Story story) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => StoryWebView(url: story.url.toString()),
-      ),
+    Navigator.of(context).pushNamed(
+      StoryWebView.routeName,
+      arguments: StoryWebViewArguments(story.id),
     );
   }
 }

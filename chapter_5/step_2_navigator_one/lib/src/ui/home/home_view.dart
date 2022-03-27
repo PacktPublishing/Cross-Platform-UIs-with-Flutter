@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:hacker_news/src/data/hacker_news_api_facade.dart';
-import 'package:hacker_news/src/ui/story/story_details_view.dart';
 import 'package:hacker_news/src/ui/story/story_list_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -15,8 +14,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   late final TabController _controller;
-  late final List<GlobalKey<NavigatorState>> _navigatorKeys =
-      List.generate(StoriesType.values.length, (index) => GlobalKey());
 
   @override
   void initState() {
@@ -44,7 +41,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
             for (final storiesType in StoriesType.values)
               Tab(text: storiesType.displayName)
           ],
-          onTap: (index) => _tap(context, index),
         ),
       ),
       body: TabBarView(
@@ -57,13 +53,5 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  void _tap(BuildContext context, int index) {
-    final navigator = _navigatorKeys[index];
-
-    if (index == _controller.index) {
-      navigator.currentState?.maybePop();
-    }
   }
 }
