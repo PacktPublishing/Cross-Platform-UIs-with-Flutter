@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hacker_news/src/data/hacker_news_api_facade.dart';
 import 'package:hacker_news/src/ui/home/home_view.dart';
