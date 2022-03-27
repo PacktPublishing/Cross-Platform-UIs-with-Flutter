@@ -15,7 +15,9 @@ class StoryController with ChangeNotifier {
   UnmodifiableListView<Story> get stories => UnmodifiableListView(_stories);
   Story? selectedStory;
 
-  Future<void> getStories(StoriesType storiesType) async {
+  Future<void> getStories({
+    StoriesType storiesType = StoriesType.newStories,
+  }) async {
     final stories = await _hackerNewsApiFacade.getItems(
       storiesType: storiesType,
       fromMap: Story.fromMap,

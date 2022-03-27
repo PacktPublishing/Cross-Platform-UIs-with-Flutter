@@ -10,7 +10,7 @@ class HackerNewsApiFacade {
 
   Future<List<Story>> getStories({
     int storyCount = 10,
-    StoriesType storyType = StoriesType.newStories,
+    StoriesType storiesType = StoriesType.newStories,
   }) async {
     try {
       return await getItems(fromMap: Story.fromMap);
@@ -22,11 +22,11 @@ class HackerNewsApiFacade {
 
   Future<List<T>> getItems<T extends Item>({
     int count = 10,
-    StoriesType storyType = StoriesType.newStories,
+    StoriesType storiesType = StoriesType.newStories,
     required T Function(Map<String, dynamic> json) fromMap,
   }) async {
     try {
-      Uri url = Uri.parse('$endpoint/${storyType.name.toLowerCase()}.json');
+      Uri url = Uri.parse('$endpoint/${storiesType.name.toLowerCase()}.json');
       http.Response response = await _client.get(url);
       if (response.statusCode == 200) {
         List<int> ids = List<int>.from(jsonDecode(response.body));
