@@ -16,19 +16,18 @@ class ContactEditView extends StatefulWidget {
 }
 
 class _ContactEditViewState extends State<ContactEditView> {
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _firstNameController = TextEditingController(text: 'John');
+  final _lastNameController = TextEditingController(text: 'Smith');
 
   @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
     super.dispose();
   }
+
+  String? _firstNameErrorMessage;
+  String? _lastNameErrorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,56 +35,43 @@ class _ContactEditViewState extends State<ContactEditView> {
       appBar: AppBar(
         title: Text(widget.id == null ? 'Create contact' : 'Edit contact'),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          setState(() {
+            _firstNameErrorMessage = _firstNameController.text.isEmpty
+                ? 'First name is required'
+                : null;
+            _lastNameErrorMessage = _lastNameController.text.isEmpty
+                ? 'Last name is required'
+                : null;
+          });
+        },
+        icon: const Icon(Icons.add),
+        label: const Text('Create contact'),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 32,
+        ),
         children: [
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: _firstNameController,
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                label: Text('First name'),
-                border: OutlineInputBorder(),
-              ),
+          TextField(
+            controller: _firstNameController,
+            decoration: InputDecoration(
+              label: const Text('First name'),
+              border: const OutlineInputBorder(),
+              errorText: _firstNameErrorMessage,
             ),
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: _lastNameController,
-              textInputAction: TextInputAction.next,
-              decoration: const InputDecoration(
-                label: Text('Last name'),
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: _phoneController,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                label: Text('Phone'),
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: _emailController,
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                label: Text('Email'),
-                border: OutlineInputBorder(),
-              ),
+          TextField(
+            controller: _lastNameController,
+            decoration: InputDecoration(
+              label: const Text('Last name'),
+              border: const OutlineInputBorder(),
+              errorText: _lastNameErrorMessage,
             ),
           ),
         ],

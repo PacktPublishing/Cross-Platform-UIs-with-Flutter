@@ -20,12 +20,8 @@ class ContactEditView extends StatefulWidget {
 }
 
 class _ContactEditViewState extends State<ContactEditView> {
-  final _formKey = GlobalKey<FormState>();
-
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
-  late final TextEditingController _emailController;
-  late final TextEditingController _phoneController;
 
   late final _contact = context
       .read<ContactController?>()
@@ -37,75 +33,38 @@ class _ContactEditViewState extends State<ContactEditView> {
     super.initState();
     _firstNameController = TextEditingController(text: _contact?.firstName);
     _lastNameController = TextEditingController(text: _contact?.lastName);
-    _emailController = TextEditingController(text: _contact?.emailAddress);
-    _phoneController = TextEditingController(text: _contact?.phoneNumber);
   }
 
   @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_contact == null ? 'Create contact' : 'Edit contact'),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            final contactController = context.read<ContactController>();
-            if (_contact == null) {
-              final newContact = Contact(
-                id: contactController.contacts.length + 1,
-                firstName: _firstNameController.text,
-                lastName: _lastNameController.text,
-                emailAddress: _emailController.text,
-                phoneNumber: _phoneController.text,
-              );
-              context.read<ContactController>().addContact(newContact);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Successfully created ${newContact.firstName}'),
-                ),
-              );
-            } else {
-              context
-                  .read<ContactController>()
-                  .updateContact(_contact!.copyWith(
-                    firstName: _firstNameController.text,
-                    lastName: _lastNameController.text,
-                    emailAddress: _emailController.text,
-                    phoneNumber: _phoneController.text,
-                  ));
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Successfully updated ${_contact!.firstName}'),
-                ),
-              );
-            }
-          }
-        },
-        icon: const Icon(Icons.save),
-        label: const Text('Save'),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      body: Form(
-        key: _formKey,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 32,
+    return Form(
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(_contact == null ? 'Create contact' : 'Edit contact'),
           ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              if (Form.of(context)!.validate()) {}
+            },
+            icon: const Icon(Icons.save),
+            label: const Text('Save'),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+          body: ListView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 32,
+            ),
+            children: [
+              TextFormField(
                 controller: _firstNameController,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
@@ -115,11 +74,8 @@ class _ContactEditViewState extends State<ContactEditView> {
                 validator: (value) =>
                     (value?.isEmpty ?? true) ? 'First name is required' : null,
               ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
+              const SizedBox(height: 16),
+              TextFormField(
                 controller: _lastNameController,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
@@ -129,34 +85,16 @@ class _ContactEditViewState extends State<ContactEditView> {
                 validator: (value) =>
                     (value?.isEmpty ?? true) ? 'Last name is required' : null,
               ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
-                controller: _phoneController,
-                textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  label: Text('Phone'),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
-                controller: _emailController,
-                textInputAction: TextInputAction.done,
-                decoration: const InputDecoration(
-                  label: Text('Email'),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+              ElevatedButton(
+                onPressed: () {
+                  Form.of(context)!.reset();
+                },
+                child: const Text('Reset'),
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }
