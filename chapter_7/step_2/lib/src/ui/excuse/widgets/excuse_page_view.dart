@@ -17,9 +17,15 @@ class ExcusePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     var selectedExcuse = excuses[currentExcuse];
 
-    return ExcuseCard(
-      key: ValueKey(selectedExcuse.id),
-      excuse: selectedExcuse,
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 800),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return ScaleTransition(scale: animation, child: child);
+      },
+      child: ExcuseCard(
+        key: ValueKey(selectedExcuse.id),
+        excuse: selectedExcuse,
+      ),
     );
   }
 }
