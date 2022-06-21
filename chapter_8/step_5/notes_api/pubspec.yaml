@@ -1,4 +1,4 @@
-name: notes_server
+name: notes_api
 description: An new Dart Frog application
 version: 1.0.0+1
 publish_to: none
