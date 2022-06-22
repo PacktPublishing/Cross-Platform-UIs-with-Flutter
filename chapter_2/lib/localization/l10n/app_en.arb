@@ -4,9 +4,9 @@
     "standings": "Standings",
     "circuit_name": "Circuit name",
     "winner": "Winner",
-    "points": "Points",
-    "next_races": "Next races",
+    "points": "Points",    
     "done": "done",
+    "next_races": "Next races",
     "left": "left",
     "upcoming_races": "Upcoming races"
 }
