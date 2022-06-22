@@ -27,11 +27,13 @@ abstract class RouteGenerator {
     switch (settings.name) {
       case home:
         return PageRouteBuilder<HomePage>(
+          settings: settings,
           pageBuilder: (_, __, ___) => const HomePage(),
         );
 
       case nextRacesPage:
         return PageRouteBuilder<NextRacesPage>(
+          settings: settings,
           pageBuilder: (_, __, ___) => const NextRacesPage(),
         );
 
