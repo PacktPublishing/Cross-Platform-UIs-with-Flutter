@@ -12,7 +12,8 @@ class TodosView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TodosController controller = context.read();
+    final TodosController controller = context.watch();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
