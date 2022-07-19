@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:notes_app/src/common/util/device.dart';
 
 class NoteForm extends StatefulWidget {
   const NoteForm({
@@ -52,44 +51,30 @@ class _NoteFormState extends State<NoteForm> {
         },
         label: const Text('Save'),
       ),
-      floatingActionButtonLocation: isMobileDeviceOrWeb
-          ? FloatingActionButtonLocation.endFloat
-          : FloatingActionButtonLocation.endTop,
       body: Form(
         key: widget.formKey,
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxHeight: 420,
-              maxWidth: 720,
+        child: ListView(
+          padding: const EdgeInsets.all(8.0),
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                label: Text('Title'),
+                hintText: 'Add a title',
+                border: OutlineInputBorder(),
+              ),
+              controller: _titleController,
             ),
-            child: ListView(
-              padding: isDesktopDeviceOrWeb
-                  ? const EdgeInsets.only(left: 12, right: 12, top: 26)
-                  : const EdgeInsets.all(12),
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text('Title'),
-                    hintText: 'Add a title',
-                    border: OutlineInputBorder(),
-                  ),
-                  controller: _titleController,
-                ),
-                const Gap(16),
-                TextFormField(
-                  maxLines: 4,
-                  decoration: const InputDecoration(
-                    label: Text('Note'),
-                    hintText: 'Take a note',
-                    border: OutlineInputBorder(),
-                  ),
-                  controller: _contentController,
-                ),
-              ],
+            const Gap(16),
+            TextFormField(
+              maxLines: 4,
+              decoration: const InputDecoration(
+                label: Text('Note'),
+                hintText: 'Take a note',
+                border: OutlineInputBorder(),
+              ),
+              controller: _contentController,
             ),
-          ),
+          ],
         ),
       ),
     );
