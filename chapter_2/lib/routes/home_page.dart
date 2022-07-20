@@ -12,6 +12,10 @@ class HomePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  void _openNextRaces(BuildContext context) {
+    Navigator.of(context).pushNamed(RouteGenerator.nextRacesPage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -22,9 +26,7 @@ class HomePage extends StatelessWidget {
           elevation: 5,
           actions: [
             IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RouteGenerator.nextRacesPage);
-              },
+              onPressed: () => _openNextRaces(context),
               icon: const Icon(Icons.calendar_today_outlined),
             ),
           ],
