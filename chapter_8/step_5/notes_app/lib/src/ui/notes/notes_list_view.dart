@@ -61,112 +61,114 @@ class NotesListView extends ConsumerWidget {
             final notes = ref.watch(notesProvider);
             final layout = ref.watch(layoutProviderProvider);
 
-            return RefreshIndicator(
-              onRefresh: () => ref.refresh(notesProvider.future),
-              child: notes.maybeWhen(
-                data: (data) {
-                  if (layout == Layout.grid) {
-                    final screenSize = MediaQuery.of(context).size.width;
-                    final crossAxisCount = min(
-                        max((screenSize / ScreenType.handset.minWidth!).floor(),
-                            2),
-                        4);
+            return notes.maybeWhen(
+              error: (error, _) {
+                print(error);
 
-                    return SingleChildScrollView(
-                      padding: isDesktopDeviceOrWeb
-                          ? const EdgeInsets.only(top: 24)
-                          : const EdgeInsets.all(12),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1200),
-                        child: StaggeredGrid.count(
-                          crossAxisCount: crossAxisCount,
-                          children: data.map(
-                            (note) {
-                              return ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  minWidth: 300,
-                                  maxWidth: 300,
+                return Container();
+              },
+              data: (data) {
+                if (layout == Layout.grid) {
+                  final screenSize = MediaQuery.of(context).size.width;
+                  final crossAxisCount = min(
+                      max((screenSize / ScreenType.handset.minWidth!).floor(),
+                          2),
+                      4);
+
+                  return SingleChildScrollView(
+                    padding: isDesktopDeviceOrWeb
+                        ? const EdgeInsets.only(top: 24)
+                        : const EdgeInsets.all(12),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1200),
+                      child: StaggeredGrid.count(
+                        crossAxisCount: crossAxisCount,
+                        children: data.map(
+                          (note) {
+                            return ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: 300,
+                                maxWidth: 300,
+                              ),
+                              child: Card(
+                                elevation: 0,
+                                color: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  side: const BorderSide(color: Colors.grey),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: Colors.transparent,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
-                                    side: const BorderSide(color: Colors.grey),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          note.title,
-                                          maxLines: 2,
-                                        ),
-                                        const Gap(8),
-                                        Text(
-                                          note.content,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 4,
-                                        ),
-                                      ],
-                                    ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        note.title,
+                                        maxLines: 2,
+                                      ),
+                                      const Gap(8),
+                                      Text(
+                                        note.content,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 4,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ).toList(),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ),
+                  );
+                }
+
+                return ListView.builder(
+                  padding: isDesktopDeviceOrWeb
+                      ? const EdgeInsets.only(left: 12, right: 12, top: 24)
+                      : const EdgeInsets.all(12),
+                  itemBuilder: (context, index) {
+                    final note = data[index];
+
+                    return GestureDetector(
+                      onTap: () => appRouter.pushNamed(
+                        NoteDetailsView.routeNameEdit,
+                        params: {'id': note.id},
+                      ),
+                      child: Card(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                          side: const BorderSide(color: Colors.grey),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                note.title,
+                                maxLines: 2,
+                              ),
+                              const Gap(8),
+                              Text(
+                                note.content,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
-                  }
-
-                  return ListView.builder(
-                    padding: isDesktopDeviceOrWeb
-                        ? const EdgeInsets.only(left: 12, right: 12, top: 24)
-                        : const EdgeInsets.all(12),
-                    itemBuilder: (context, index) {
-                      final note = data[index];
-
-                      return GestureDetector(
-                        onTap: () => appRouter.pushNamed(
-                          NoteDetailsView.routeNameEdit,
-                          params: {'id': note.id},
-                        ),
-                        child: Card(
-                          elevation: 0,
-                          color: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            side: const BorderSide(color: Colors.grey),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  note.title,
-                                  maxLines: 2,
-                                ),
-                                const Gap(8),
-                                Text(
-                                  note.content,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 4,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    itemCount: data.length,
-                  );
-                },
-                orElse: () => Container(),
-              ),
+                  },
+                  itemCount: data.length,
+                );
+              },
+              orElse: () => Container(),
             );
           },
         ),

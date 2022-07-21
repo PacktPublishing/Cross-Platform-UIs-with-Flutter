@@ -49,7 +49,7 @@ class NoteFacade {
 
 final noteFacadeProvider = Provider<NoteFacade>((ref) {
   final baseUrl =
-      isMobileDevice ? 'http://10.0.2.2:8080' : 'http://localhost:8080';
+      isMobileDevice ? 'http://10.0.2.2:8080' : 'http://localhost:8080/';
   final options = BaseOptions(baseUrl: baseUrl);
 
   return NoteFacade(Dio(options));
