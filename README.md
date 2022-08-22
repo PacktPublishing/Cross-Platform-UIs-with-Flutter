@@ -7,7 +7,7 @@ This is the code repository for [Cross-Platform UIs with Flutter](https://www.pa
 **Unlock the ability to create native multiplatform UIs using a single codebase with Flutter 3**
 
 ## What is this book about?
-First Paragraph from the Long Description
+Flutter is a UI toolkit for building beautiful, natively compiled applications for mobile, web, desktop, and embedded devices from a single codebase. With Flutter, you can write your code once and run it anywhere using a single codebase to target multiple platforms. This book is a comprehensive, project-based guide for new and emerging Flutter developers that will help empower you to build bulletproof applications
 
 This book covers the following exciting features: 
 * Create responsive and attractive UIs for any device
