@@ -66,3 +66,7 @@ is an experienced software engineer, with over 10 years of experience as a web a
 
 **Alberto Miola**
 is an Italian software engineer who graduated in computer science from the University of Padua. He's currently working with Dart and Flutter, with which he has more than 3 years of professional experience, and also is a Dart and Flutter GDE. He attends online conferences, writes technical articles about Flutter, and is also the author of the “Flutter Complete Reference” book series.
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781801810494">https://packt.link/free-ebook/9781801810494 </a> </p>
