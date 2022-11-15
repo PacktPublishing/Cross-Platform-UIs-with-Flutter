@@ -60,6 +60,10 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 * Flutter Cookbook [[Packt]](https://www.packtpub.com/product/flutter-cookbook/9781838823382) [[Amazon]](https://www.amazon.com/dp/1838823387)
 
+## Errata 
+ * Page 22 (code snippet 1 , line 10):  **return model.counter != oldWidget. model.counter ||** _should be_ **return model.counter != oldWidget.model.counter ||**
+ * Page 22 (code snippet 1 , line 20):  **}** _should be_ **},**
+ 
 ## Get to Know the Authors
 **Ryan Edge**
 is an experienced software engineer, with over 10 years of experience as a web and mobile developer. He graduated in computer science from Southern Polytechnic State University. He is currently working for a stealth startup and part-time as a freelancer, with over 3 years of professional experience in Flutter. He is a Google Developer Expert in Flutter, an active member the open-source community, and a co-organizer of his local Flutter meetup group.
